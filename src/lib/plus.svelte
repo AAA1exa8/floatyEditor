@@ -5,15 +5,18 @@
 
 
 
-
 <script lang="ts">
-    export var editorCounter: number[] = [0];    
-
+    export var editorCounter= [
+        {z: 1, id:0}
+    ];    
     function addEditor(){
         if (editorCounter.length == 0) {
-            editorCounter = [0]
+            editorCounter = [
+                {z: 1, id:0}
+            ]
         }else{
-            editorCounter = editorCounter.concat(editorCounter[editorCounter.length-1]+1)
+            editorCounter = editorCounter.concat({z: Math.max(...editorCounter.map(editor => editor.z))+1, 
+                id:editorCounter[editorCounter.length-1].id+1})
         }
         console.log(editorCounter)
     }    

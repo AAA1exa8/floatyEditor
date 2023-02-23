@@ -1,4 +1,6 @@
-<div class="w-360px h-540px bg-yellow-400 flex flex-col rounded-25px absolute" style="left: {left}px; top: {top}px;">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="w-360px h-540px bg-yellow-400 flex flex-col rounded-25px absolute" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
+    on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})}>
     {#if editor}
         <div class="m-8px flex mx-12px">
             <div class="flex">
@@ -65,6 +67,9 @@
     let left = 0;
 	let top = 0;
     let moving = false;
+    
+    
+    export var zIndex = 1;
 
     function onMouseDown() {
 		moving = true;
@@ -80,11 +85,14 @@
 	function onMouseUp() {
 		moving = false;
 	}
+
+
   
     let element: HTMLDivElement
     let editor: Editor
 
-    const removeEditor = createEventDispatcher()
+    const removeEditor = createEventDispatcher();
+    const toFocus = createEventDispatcher();
   
     onMount(() => {
       editor = new Editor({

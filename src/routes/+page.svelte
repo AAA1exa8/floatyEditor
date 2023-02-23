@@ -2,19 +2,35 @@
     import Tiptap from '$lib/editor.svelte'
     import Plus from '$lib/plus.svelte'
 
-    let editors: number[] = [0];
+    let editors = [
+        {z: 1, id:0}
+    ];
 
     function destroyEditor(event: { detail: number; }){
-        editors.splice(editors.indexOf(event.detail), 1)
-        editors = editors
+        editors = editors.filter(e => e.id != event.detail)
         console.log(editors)
+    }
+    function changeZIndexes(event: { detail: {z: number, id: number} }){
+        if (Math.max(...editors.map(editor => editor.z)) == event.detail.z) {
+            return
+        }
+        editors.forEach(editor => {
+            if (editor.z > event.detail.z) {
+                editor.z -= 1
+            }
+        });
+        let toChange = editors.find(editor => editor.id == event.detail.id)
+        if (toChange) {
+            toChange.z = Math.max(...editors.map(editor => editor.z))+1
+        }
+        editors = editors
     }
 </script>
 
 <Plus bind:editorCounter={editors} />
 
-{#each editors as editor (editor)}
-    <Tiptap id={editor} on:removeEditor={destroyEditor}/>   
+{#each editors as editor (editor.id)}
+    <Tiptap zIndex={editor.z} id={editor.id} on:removeEditor={destroyEditor} on:toFocus={changeZIndexes}/>   
 {/each}
 
 
