@@ -1,5 +1,5 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<span class="w-69px h-69px text-center absolute right-10px top-10px text-size-60px cursor-pointer select-none z-999 rounded-full font-$material_icons" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
+<span class="w-69px h-69px text-center absolute right-10px top-10px text-size-60px cursor-pointer select-none z-999 rounded-full font-$material_icons bg-light-50" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
     &#xF4FE;
 </span>  
 
