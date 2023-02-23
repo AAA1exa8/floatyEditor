@@ -35,6 +35,8 @@
     </div>
 </div>
 
+<Bubblemenu bind:bubbleMenu={bubbleMenu} bind:editor={editor}/>
+
 
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
 
@@ -56,12 +58,22 @@
         color: rgb(0, 0, 0);
         background-color: rgba(20, 20, 20, 0.05);   
     }
+    :global(code) {
+        background-color: rgba(97, 97, 97, 0.5);
+        border-radius: 0.25em;
+        color: #616161;
+        line-height: 25px;
+        padding-inline: 0.25em;
+    }
 </style>
 
 <script lang="ts">
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { Editor } from '@tiptap/core'
     import StarterKit from '@tiptap/starter-kit'
+    import BubbleMenu from '@tiptap/extension-bubble-menu'
+
+    import Bubblemenu from '$lib/bubbleMenu.svelte'
 
     export var id:number;
 
@@ -72,6 +84,7 @@
     
     export var zIndex = 1;
   
+    let bubbleMenu: HTMLElement
     let element: HTMLDivElement
     let editor: Editor
 
@@ -82,7 +95,10 @@
       editor = new Editor({
         element: element,
         extensions: [
-          StarterKit,
+            StarterKit,
+            BubbleMenu.configure({
+                element: bubbleMenu
+            })
         ],
             editorProps: {
                 attributes: {

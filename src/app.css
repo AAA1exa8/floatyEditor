@@ -1,6 +1,5 @@
 *{
     @apply box-border;
-    font-family: sans-serif;
     --material_icons: material_icons;
 }
 body{
@@ -21,6 +20,7 @@ p:first-child, h1:first-child, h2:first-child {
 }
 
 p, h1, h2 {
+    font-family: sans-serif;
     padding-left: 10px;
     display: block;
     margin-block-start: 0px;
