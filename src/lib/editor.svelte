@@ -19,11 +19,12 @@
                     &#xF79F;
                 </span>
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <span on:click={() => editor.chain().focus().setParagraph().run()} class:active={editor.isActive('paragraph')}>
+                <span on:click={() => editor.chain().focus().setParagraph().run()} 
+                    class:active={editor.isActive('paragraph')}>
                     &#xF4B4;
                 </span>
             </div>
-            <div class="flex-grow cursor-move select-none" on:mousedown={onMouseDown}></div>
+            <div class="flex-grow cursor-move" on:mousedown={onMouseDown}></div>
         </div>
     {/if}
     
@@ -70,23 +71,6 @@
     
     
     export var zIndex = 1;
-
-    function onMouseDown() {
-		moving = true;
-	}
-	
-	function onMouseMove(e: { movementX: number; movementY: number; }) {
-		if (moving) {
-			left += e.movementX;
-			top += e.movementY;
-		}
-	}
-	
-	function onMouseUp() {
-		moving = false;
-	}
-
-
   
     let element: HTMLDivElement
     let editor: Editor
@@ -118,4 +102,19 @@
         editor.destroy()
       }
     })
+
+    function onMouseDown() {
+		moving = true;
+	}
+	
+	function onMouseMove(e: { movementX: number; movementY: number; }) {
+		if (moving) {
+			left += e.movementX;
+			top += e.movementY;
+		}
+	}
+	
+	function onMouseUp() {
+		moving = false;
+	}
 </script>
