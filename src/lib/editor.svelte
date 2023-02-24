@@ -1,24 +1,21 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="w-360px h-540px bg-yellow-400 flex flex-col rounded-25px absolute" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
+<div class="w-360px h-540px bg-yellow-400 flex flex-col rounded-25px md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
     on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})}>
     {#if editor}
         <div class="m-8px flex mx-12px">
             <div class="flex">
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <span
                     on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
                     class:active={editor.isActive('heading', { level: 1 })}
                 >
                     &#xF799;
                 </span>
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <span   
                     on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
                     class:active={editor.isActive('heading', { level: 2 })}
                 >
                     &#xF79F;
                 </span>
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <span on:click={() => editor.chain().focus().setParagraph().run()} 
                     class:active={editor.isActive('paragraph')}>
                     &#xF4B4;
@@ -29,7 +26,6 @@
     {/if}
     
     <div class="overflow-auto h-full m-8px bg-yellow-200 rounded-25px" bind:this={element} />
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div class="pl-8px pb8px">
         <span class="text-red-600 p-8px cursor-pointer select-none font-$material_icons text-21px" on:click={() => removeEditor('removeEditor', id)}>&#xF78B;</span>
     </div>
@@ -38,7 +34,7 @@
 <Bubblemenu bind:bubbleMenu={bubbleMenu} bind:editor={editor}/>
 
 
-<svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
+<svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} on:resize={positionCorrection}/>
 
 
   
@@ -53,6 +49,9 @@
         color: rgba(0, 0, 0, 0.5);
         cursor: pointer;
         user-select: none;
+    }
+    div div div span:hover{
+        color: rgb(0, 0, 0);
     }
     span.active{
         color: rgb(0, 0, 0);
@@ -127,8 +126,18 @@
 		if (moving) {
 			left += e.movementX;
 			top += e.movementY;
+
+            positionCorrection()
 		}
 	}
+
+    function positionCorrection(){
+        if (left > document.body.clientWidth-360) {
+                left = document.body.clientWidth-360;
+        }else if (left < 0) {
+                left = 0
+        }
+    }
 	
 	function onMouseUp() {
 		moving = false;
