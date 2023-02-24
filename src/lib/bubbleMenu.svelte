@@ -1,4 +1,4 @@
-<div bind:this={bubbleMenu} class="bubbleMenu">
+<div bind:this={bubbleMenu} class="flex bg-dark-900 p-0.2rem rounded-0.5rem transiti" style="transition: visibility 0.1s ease, opacity 0.1s ease;">
     {#if editor}
     <button on:click={() => editor.chain().focus().toggleBold().run()} class:active={editor.isActive('bold')}>
         &#xF5F0;
@@ -19,20 +19,10 @@
 
 
 
-<style>
+<style lang="postcss">
     button.active {
-        background: black;
-        color: white;
+        @apply bg-black text-white;
     }
-	
-	div{
-		display: flex;
-		background-color: #0D0D0D;
-		padding: 0.2rem;
-		border-radius: 0.5rem;
-		transition: visibility 0.1s ease, opacity 0.1s ease;
-	}
-	
 	button {
         font-family: material_icons;
         font-size: 25px;
@@ -44,7 +34,6 @@
 		opacity: 0.6;
 		margin: 0;
 	}
-	
 	button:hover{
 		opacity: 1;
 	}	
