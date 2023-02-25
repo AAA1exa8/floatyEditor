@@ -1,5 +1,5 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="w-360px h-540px bg-yellow-400 flex flex-col rounded-25px md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
+<div class="md:w-360px m-2 md:m-0 h-540px bg-yellow-400 flex flex-col rounded-25px md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
     on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})}>
     {#if editor}
         <div class="m-8px flex mx-12px">
@@ -21,8 +21,8 @@
                     &#xF4B4;
                 </span>
             </div>
-            <div class="flex-grow cursor-move" on:mousedown={onMouseDown}></div>
-        </div>
+            <div class="flex-grow cursor-move" on:mousedown={onMouseDown} on:touchstart={onTouchStart}></div>
+        </div>  
     {/if}
     
     <div class="overflow-auto h-full m-8px bg-yellow-200 rounded-25px" bind:this={element} />
@@ -34,7 +34,7 @@
 <Bubblemenu bind:bubbleMenu={bubbleMenu} bind:editor={editor}/>
 
 
-<svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} on:resize={positionCorrection}/>
+<svelte:window on:mouseup={onMoveEnd} on:mousemove={onMouseMove} on:resize={positionCorrection} on:touchend={onMoveEnd} on:touchmove={onTouchMove}/>
 
 
   
@@ -73,11 +73,14 @@
     import BubbleMenu from '@tiptap/extension-bubble-menu'
 
     import Bubblemenu from '$lib/bubbleMenu.svelte'
+	import { e } from 'unocss';
 
     export var id:number;
 
     let left = 0;
 	let top = 0;
+    let initialleft: number;
+    let initialtop: number;
     let moving = false;
     
     
@@ -120,6 +123,18 @@
 
     function onMouseDown() {
 		moving = true;
+        
+	}
+
+    function onTouchStart(e: TouchEvent) {
+        moving = true;
+        const touch = e.touches[0];
+        initialleft = touch.pageX - left;
+        initialtop = touch.pageY - top;
+    }
+
+    function onMoveEnd() {
+		moving = false;
 	}
 	
 	function onMouseMove(e: { movementX: number; movementY: number; }) {
@@ -131,6 +146,16 @@
 		}
 	}
 
+    function onTouchMove(e: TouchEvent) {
+        if (moving) {
+            const touch = e.touches[0];
+            left = touch.pageX - initialleft;
+            top = touch.pageY - initialtop;
+
+            positionCorrection();
+        }
+    }
+
     function positionCorrection(){
         if (left > document.body.clientWidth-360) {
                 left = document.body.clientWidth-360;
@@ -138,8 +163,4 @@
                 left = 0
         }
     }
-	
-	function onMouseUp() {
-		moving = false;
-	}
 </script>
