@@ -21,7 +21,7 @@
                     &#xF4B4;
                 </span>
             </div>
-            <div class="flex-grow cursor-move" on:mousedown={onMouseDown} on:touchstart={onTouchStart}></div>
+            <div class="flex-grow cursor-move" on:mousedown={onMouseDown} on:touchstart={onTouchStart} on:touchstart={() => toFocus('toFocus', {z: zIndex, id: id})}></div>
         </div>  
     {/if}
     
