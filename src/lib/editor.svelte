@@ -3,29 +3,31 @@
     on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})} on:click={() => focusedEditor.set(editor)}>
     {#if editor}
         <div class="m-2 flex mx-3">
-            <div class="flex">
-                <span
-                    on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
-                    class:active={editor.isActive('heading', { level: 1 })}
-                >
-                    &#xF799;
-                </span>
-                <span   
-                    on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                    class:active={editor.isActive('heading', { level: 2 })}
-                >
-                    &#xF79F;
-                </span>
-                <span on:click={() => editor.chain().focus().setParagraph().run()} 
-                    class:active={editor.isActive('paragraph')}>
-                    &#xF4B4;
-                </span>
-            </div>
+            {#if $bigWidth}
+                <div class="flex">
+                    <span
+                        on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
+                        class:active={editor.isActive('heading', { level: 1 })}
+                    >
+                        &#xF799;
+                    </span>
+                    <span   
+                        on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                        class:active={editor.isActive('heading', { level: 2 })}
+                    >
+                        &#xF79F;
+                    </span>
+                    <span on:click={() => editor.chain().focus().setParagraph().run()} 
+                        class:active={editor.isActive('paragraph')}>
+                        &#xF4B4;
+                    </span>
+                </div>
+            {/if}
             <div class="flex-grow cursor-move" on:mousedown={onMouseDown} on:touchstart={onTouchStart} on:touchstart={() => toFocus('toFocus', {z: zIndex, id: id})}></div>
         </div>  
     {/if}
     
-    <div class="overflow-auto h-full m-2 bg-yellow-200 rounded-3xl" bind:this={element} />
+    <div class="overflow-auto h-full m-2 bg-yellow-200 rounded-3xl" spellcheck="false" bind:this={element} />
     <div class="pl-2 pb-2">
         <span class="text-red-600 p-2 cursor-pointer select-none text-size-xl font-$material_icons" on:click={() => removeEditor('removeEditor', id)}>&#xF78B;</span>
     </div>
@@ -73,7 +75,7 @@
     import BubbleMenu from '@tiptap/extension-bubble-menu'
 
     import Bubblemenu from '$lib/bubbleMenu.svelte'
-    import { focusedEditor } from '$lib/stores/stores'
+    import { focusedEditor, bigWidth } from '$lib/stores/stores'
 
     export var id:number;
 

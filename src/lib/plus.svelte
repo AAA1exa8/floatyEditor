@@ -1,10 +1,12 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-{#if enoughWidth}
+{#if $bigWidth}
     <span class="w-17 h-17 text-center absolute right-2.5 top-16 text-3.75rem cursor-pointer select-none z-999 rounded-full font-$material_icons bg-light-50" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
         &#xF4FE;
     </span> 
 {:else}
     <!-- ! finish this is just visual -->
+    <!-- ! if editor has been just deleted selecting style throws error -->
+    <!-- ! not all selectors are included -->
     <div class="flex w-full h-30 flex justify-center items-center fixed bottom-0 bg-light-50 z-999" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
         <div class="flex items-center justify-center w-full">
             <span class="selector"
@@ -76,16 +78,12 @@
         {z: 1, id:0}
     ];    
 
-    var enoughWidth: boolean;
     var editor: any;
 
     focusedEditor.subscribe((value) => {
         editor = value;
     });
 
-    bigWidth.subscribe((value) => {
-        enoughWidth = value;
-    });
 
     onMount(() => {
         checkWidth();

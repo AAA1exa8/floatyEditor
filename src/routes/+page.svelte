@@ -9,11 +9,6 @@
         {z: 1, id:0}
     ];
 
-    let enoughWidth: boolean;
-    bigWidth.subscribe((value) => {
-        enoughWidth = value;
-    });
-
     function destroyEditor(event: { detail: number; }){
         editors = editors.filter(e => e.id != event.detail)
     }
@@ -42,7 +37,7 @@
     <Tiptap zIndex={editor.z} id={editor.id} on:removeEditor={destroyEditor} on:toFocus={changeZIndexes}/>   
 {/each}
 
-{#if !enoughWidth}
+{#if !$bigWidth}
     <div class="h-33"></div>
 {/if}
 
