@@ -1,8 +1,8 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="md:w-360px m-2 md:m-0 h-540px bg-yellow-400 flex flex-col rounded-25px md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
+<div class="m-2 md:m-0 md:w-90 h-135 bg-yellow-400 flex flex-col rounded-3xl md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
     on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})}>
     {#if editor}
-        <div class="m-8px flex mx-12px">
+        <div class="m-2 flex mx-3">
             <div class="flex">
                 <span
                     on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
@@ -25,9 +25,9 @@
         </div>  
     {/if}
     
-    <div class="overflow-auto h-full m-8px bg-yellow-200 rounded-25px" bind:this={element} />
-    <div class="pl-8px pb8px">
-        <span class="text-red-600 p-8px cursor-pointer select-none font-$material_icons text-21px" on:click={() => removeEditor('removeEditor', id)}>&#xF78B;</span>
+    <div class="overflow-auto h-full m-2 bg-yellow-200 rounded-3xl" bind:this={element} />
+    <div class="pl-2 pb-2">
+        <span class="text-red-600 p-2 cursor-pointer select-none text-size-xl font-$material_icons" on:click={() => removeEditor('removeEditor', id)}>&#xF78B;</span>
     </div>
 </div>
 
@@ -42,9 +42,9 @@
 <style lang="postcss">
     div div div span{
         @apply rounded-1;
-        padding: 8px;
+        padding: 0.5rem;
         font-family: material_icons;
-        font-size: 21px;
+        font-size: 1.25rem;
         text-align: center;
         color: rgba(0, 0, 0, 0.5);
         cursor: pointer;
@@ -61,7 +61,7 @@
         background-color: rgba(97, 97, 97, 0.5);
         border-radius: 0.25em;
         color: #616161;
-        line-height: 25px;
+        line-height: 1.5rem;
         padding-inline: 0.25em;
     }
 </style>
@@ -73,7 +73,6 @@
     import BubbleMenu from '@tiptap/extension-bubble-menu'
 
     import Bubblemenu from '$lib/bubbleMenu.svelte'
-	import { e } from 'unocss';
 
     export var id:number;
 
@@ -104,7 +103,7 @@
         ],
             editorProps: {
                 attributes: {
-                class: 'overflow-auto h-full rounded-25px',
+                class: 'overflow-auto h-full rounded-25px static',
                 },
             },
         content: '<p>Hello World! 🌍️ </p>',
@@ -138,7 +137,7 @@
 	}
 	
 	function onMouseMove(e: { movementX: number; movementY: number; }) {
-		if (moving) {
+		if (moving && document.body.clientWidth > 768) {
 			left += e.movementX;
 			top += e.movementY;
 
@@ -147,7 +146,7 @@
 	}
 
     function onTouchMove(e: TouchEvent) {
-        if (moving) {
+        if (moving && document.body.clientWidth > 768) {
             const touch = e.touches[0];
             left = touch.pageX - initialleft;
             top = touch.pageY - initialtop;
