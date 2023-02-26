@@ -2,6 +2,8 @@
     import Tiptap from '$lib/editor.svelte'
     import Plus from '$lib/plus.svelte'
 
+    let bigWidth: boolean = true;
+
     let editors = [
         {z: 1, id:0}
     ];
@@ -26,11 +28,15 @@
     }
 </script>
 
-<Plus bind:editorCounter={editors} />
+<Plus bind:editorCounter={editors} bind:bigWidth={bigWidth}/>
 
 {#each editors as editor (editor.id)}
     <Tiptap zIndex={editor.z} id={editor.id} on:removeEditor={destroyEditor} on:toFocus={changeZIndexes}/>   
 {/each}
+
+{#if !bigWidth}
+    <div class="h-33"></div>
+{/if}
 
 
 

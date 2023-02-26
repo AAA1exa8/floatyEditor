@@ -4,7 +4,7 @@
         &#xF4FE;
     </span> 
 {:else}
-    <div class="flex w-full flex justify-center fixed bottom-0">
+    <div class="flex w-full flex justify-center fixed bottom-0 bg-light-50 z-999">
         <span class="w-25 h-25 text-center text-22 cursor-pointer select-none z-999 rounded-full font-$material_icons bg-light-50 relative bottom-8" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
             &#xF4FE;
         </span>
@@ -22,7 +22,7 @@
 	import { onMount } from "svelte";
 
 
-    var bigWidth: boolean = true;
+    export var bigWidth: boolean = true;
 
     export var editorCounter= [
         {z: 1, id:0}
