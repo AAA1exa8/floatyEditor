@@ -1,12 +1,18 @@
 <script lang="ts">
     import Tiptap from '$lib/editor.svelte'
     import Plus from '$lib/plus.svelte'
+    import Navbar from '$lib/navbar.svelte';
 
-    let bigWidth: boolean = true;
+    import { bigWidth } from '$lib/stores/stores'
 
     let editors = [
         {z: 1, id:0}
     ];
+
+    let enoughWidth: boolean;
+    bigWidth.subscribe((value) => {
+        enoughWidth = value;
+    });
 
     function destroyEditor(event: { detail: number; }){
         editors = editors.filter(e => e.id != event.detail)
@@ -28,13 +34,15 @@
     }
 </script>
 
-<Plus bind:editorCounter={editors} bind:bigWidth={bigWidth}/>
+<Navbar/>
+
+<Plus bind:editorCounter={editors}/>
 
 {#each editors as editor (editor.id)}
     <Tiptap zIndex={editor.z} id={editor.id} on:removeEditor={destroyEditor} on:toFocus={changeZIndexes}/>   
 {/each}
 
-{#if !bigWidth}
+{#if !enoughWidth}
     <div class="h-33"></div>
 {/if}
 

@@ -1,6 +1,6 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="m-2 md:m-0 md:w-90 h-135 bg-yellow-400 flex flex-col rounded-3xl md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
-    on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})}>
+    on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})} on:click={() => focusedEditor.set(editor)}>
     {#if editor}
         <div class="m-2 flex mx-3">
             <div class="flex">
@@ -73,11 +73,12 @@
     import BubbleMenu from '@tiptap/extension-bubble-menu'
 
     import Bubblemenu from '$lib/bubbleMenu.svelte'
+    import { focusedEditor } from '$lib/stores/stores'
 
     export var id:number;
 
     let left = 0;
-	let top = 0;
+	let top = 60;
     let initialleft: number;
     let initialtop: number;
     let moving = false;
@@ -93,25 +94,26 @@
     const toFocus = createEventDispatcher();
   
     onMount(() => {
-      editor = new Editor({
-        element: element,
-        extensions: [
-            StarterKit,
-            BubbleMenu.configure({
-                element: bubbleMenu
-            })
-        ],
+        editor = new Editor({
+            element: element,
+            extensions: [
+                StarterKit,
+                BubbleMenu.configure({
+                    element: bubbleMenu
+                })
+            ],
             editorProps: {
                 attributes: {
                 class: 'overflow-auto h-full rounded-25px static',
                 },
             },
-        content: '<p>Hello World! 🌍️ </p>',
-        onTransaction: () => {
-          // force re-render so `editor.isActive` works as expected
-          editor = editor
-        },
-      })
+            content: '<p>Hello World! 🌍️ </p>',
+            onTransaction: () => {
+                // force re-render so `editor.isActive` works as expected
+                editor = editor
+            },
+        });
+        focusedEditor.set(editor);
     })
   
     onDestroy(() => {
@@ -160,6 +162,9 @@
                 left = document.body.clientWidth-360;
         }else if (left < 0) {
                 left = 0
+        }
+        if (top < 52){
+            top = 52;
         }
     }
 </script>
