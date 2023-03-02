@@ -111,6 +111,9 @@
             onTransaction: () => {
                 // force re-render so `editor.isActive` works as expected
                 editor = editor
+                if (editor == $focusedEditor){
+                    focusedEditor.set(editor);
+                }
             },
         });
         focusedEditor.set(editor);

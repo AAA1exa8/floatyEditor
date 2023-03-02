@@ -1,4 +1,7 @@
-import { writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
+import type { Editor } from '@tiptap/core';
 
-export const focusedEditor = writable();
+let editor: Editor | undefined;
+
+export const focusedEditor: Writable<Editor | undefined> = writable(editor);
 export const bigWidth = writable(true);
