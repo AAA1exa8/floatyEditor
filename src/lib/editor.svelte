@@ -55,7 +55,7 @@
     }
     span.active{
         color: rgb(0, 0, 0);
-        background-color: rgba(20, 20, 20, 0.05);   
+        background-color: rgba(20, 20, 20, 0.15);   
     }
     :global(code) {
         background-color: rgba(97, 97, 97, 0.5);
