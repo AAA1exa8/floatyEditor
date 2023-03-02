@@ -1,5 +1,5 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="m-2 md:m-0 md:w-90 h-135 bg-yellow-400 flex flex-col rounded-3 md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
+<div class="m-2 md:m-0 md:w-90 h-135 flex flex-col rounded-3 md:absolute static bg-#00ADB5" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
     on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})} on:click={() => focusedEditor.set(editor)}>
     {#if editor && $bigWidth}
         <div class="m-2 flex mx-3">
@@ -25,9 +25,9 @@
         </div>  
     {/if}
     
-    <div class="overflow-auto h-full m-2 bg-yellow-200 rounded-2" spellcheck="false" bind:this={element} />
+    <div class="overflow-auto h-full m-2 bg-#EEEEEE rounded-2" spellcheck="false" bind:this={element} />
     <div class="pl-2 pb-2">
-        <span class="text-red-600 p-2 cursor-pointer select-none text-size-xl font-$material_icons" on:click={() => removeEditor('removeEditor', id)}>&#xF78B;</span>
+        <span class=" text-warm-gray-900 p-2 cursor-pointer select-none text-size-xl font-$material_icons" on:click={() => removeEditor('removeEditor', id)}>&#xF78B;</span>
     </div>
 </div>
 

@@ -1,5 +1,5 @@
 <div class="h-13"></div>
-<header class="fixed bg-orange-200 z-2 w-screen font-bold top-0">
+<header class="fixed bg-#EEEEEE z-2 w-screen font-bold top-0">
     <div>
         <nav>
             <span class="text-3xl">
