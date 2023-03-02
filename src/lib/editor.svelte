@@ -1,9 +1,8 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="m-2 md:m-0 md:w-90 h-135 bg-yellow-400 flex flex-col rounded-3xl md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
+<div class="m-2 md:m-0 md:w-90 h-135 bg-yellow-400 flex flex-col rounded-3 md:absolute static" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
     on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})} on:click={() => focusedEditor.set(editor)}>
-    {#if editor}
+    {#if editor && $bigWidth}
         <div class="m-2 flex mx-3">
-            {#if $bigWidth}
                 <div class="flex">
                     <span
                         on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
@@ -22,12 +21,11 @@
                         &#xF4B4;
                     </span>
                 </div>
-            {/if}
             <div class="flex-grow cursor-move" on:mousedown={onMouseDown} on:touchstart={onTouchStart} on:touchstart={() => toFocus('toFocus', {z: zIndex, id: id})}></div>
         </div>  
     {/if}
     
-    <div class="overflow-auto h-full m-2 bg-yellow-200 rounded-3xl" spellcheck="false" bind:this={element} />
+    <div class="overflow-auto h-full m-2 bg-yellow-200 rounded-2" spellcheck="false" bind:this={element} />
     <div class="pl-2 pb-2">
         <span class="text-red-600 p-2 cursor-pointer select-none text-size-xl font-$material_icons" on:click={() => removeEditor('removeEditor', id)}>&#xF78B;</span>
     </div>
@@ -106,7 +104,7 @@
             ],
             editorProps: {
                 attributes: {
-                class: 'overflow-auto h-full rounded-25px static',
+                class: 'overflow-auto h-full rounded-2 static',
                 },
             },
             content: '<p>Hello World! 🌍️ </p>',
