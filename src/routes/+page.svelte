@@ -3,7 +3,7 @@
     import Plus from '$lib/plus.svelte'
     import Navbar from '$lib/navbar.svelte';
 
-    import { bigWidth, focusedEditor } from '$lib/stores/stores'
+    import { focusedEditor } from '$lib/stores/stores'
 
     let editors = [
         {z: 1, id:0}
@@ -11,7 +11,7 @@
 
     function destroyEditor(event: { detail: number; }){
         editors = editors.filter(e => e.id != event.detail)
-        focusedEditor.set(false)
+        focusedEditor.set(undefined)
     }
     function changeZIndexes(event: { detail: {z: number, id: number} }){
         if (Math.max(...editors.map(editor => editor.z)) == event.detail.z) {
@@ -32,15 +32,10 @@
 
 <Navbar/>
 
-<Plus bind:editorCounter={editors}/>
-
 {#each editors as editor (editor.id)}
     <Tiptap zIndex={editor.z} id={editor.id} on:removeEditor={destroyEditor} on:toFocus={changeZIndexes}/>   
 {/each}
 
-{#if !$bigWidth}
-    <div class="h-33"></div>
-{/if}
-
+<Plus bind:editorCounter={editors}/>
 
 
