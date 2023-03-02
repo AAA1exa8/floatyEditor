@@ -3,7 +3,7 @@
     import Plus from '$lib/plus.svelte'
     import Navbar from '$lib/navbar.svelte';
 
-    import { bigWidth } from '$lib/stores/stores'
+    import { bigWidth, focusedEditor } from '$lib/stores/stores'
 
     let editors = [
         {z: 1, id:0}
@@ -11,6 +11,7 @@
 
     function destroyEditor(event: { detail: number; }){
         editors = editors.filter(e => e.id != event.detail)
+        focusedEditor.set(false)
     }
     function changeZIndexes(event: { detail: {z: number, id: number} }){
         if (Math.max(...editors.map(editor => editor.z)) == event.detail.z) {

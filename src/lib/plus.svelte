@@ -4,26 +4,25 @@
         &#xF4FE;
     </span> 
 {:else}
-    <!-- ! finish this is just visual -->
-    <!-- ! if editor has been just deleted selecting style throws error -->
-    <!-- ! not all selectors are included -->
+    <!-- TODO not all selectors are included -->
+    <!-- ! editor.isActive nefunguje -->
     <div class="flex w-full h-30 flex justify-center items-center fixed bottom-0 bg-light-50 z-999" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
         <div class="flex items-center justify-center w-full">
             <span class="selector"
-                on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
-                class:active={editor.isActive('heading', { level: 1 })}
+                on:click={() => selectStyle({string:'heading', level:1} )}
+                class:active={checkStyle({string:'heading', level: 1 })}
             >
                 &#xF799;
             </span>
             <span class="selector"
-                on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                class:active={editor.isActive('heading', { level: 2 })}
+                on:click={() => selectStyle({string:'heading', level:2} )}
+                class:active={checkStyle({string:'heading', level: 2 })}
             >
                 &#xF79F;
             </span>
             <span class="selector" 
-                on:click={() => {editor.chain().focus().setParagraph().run()}} 
-                class:active={editor.isActive('paragraph')}>
+                on:click={() => selectStyle('paragraph')}
+                class:active={checkStyle('paragraph')}>
                 &#xF4B4;
             </span>
         </div>
@@ -35,25 +34,24 @@
 
         <div class="flex items-center justify-center w-full">
             <span class="selector"
-                on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
-                class:active={editor.isActive('heading', { level: 1 })}
+                on:click={() => selectStyle('bold')}
+                class:active={checkStyle('bold')}
             >
                 &#xF5F0;
             </span>
             <span class="selector"
-                on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                class:active={editor.isActive('heading', { level: 2 })}
+                on:click={() => selectStyle('italic')}
+                class:active={checkStyle('italic')}
             >
                 &#xF5F4;
             </span>
             <span class="selector" 
-                on:click={() => editor.chain().focus().setParagraph().run()} 
-                class:active={editor.isActive('paragraph')}>
+                on:click={() => selectStyle('code')} 
+                class:active={checkStyle('code')}>
                 &#xF2C8;
             </span>
         </div>
     </div>
-    <!-- ! this is just visual -->
 {/if}
  
 
@@ -63,6 +61,15 @@
     .selector {
         @apply items-center justify-center text-3xl cursor-pointer select-none z-999 rounded-full bg-light-50 mx-5 relative;
         font-family: material_icons;
+        color: rgba(0, 0, 0, 0.5);
+    }
+    /* ! this shits kinda wonky */
+    span.active {
+        color: rgb(0, 0, 0);
+        background-color: rgba(20, 20, 20, 0.05);
+    }
+    .active:hover {
+        color: rgb(0, 0, 0);
     }
 </style>
 
@@ -72,6 +79,7 @@
 	import { onMount } from "svelte";
 
     import { focusedEditor, bigWidth} from "$lib/stores/stores";
+	import { isActive } from "@tiptap/core";
 
     
     export var editorCounter= [
@@ -104,5 +112,38 @@
             editorCounter = editorCounter.concat({z: Math.max(...editorCounter.map(editor => editor.z))+1, 
                 id:editorCounter[editorCounter.length-1].id+1})
         }
+    }
+
+    function selectStyle(style: string | { string: string, level: number}){
+        if (typeof style == "string" && editor) {
+            switch (style) {
+                case "paragraph":
+                    editor.chain().focus().setParagraph().run();
+                    break;
+                case "bold":
+                    editor.chain().focus().toggleBold().run();
+                    break;
+                case "italic":
+                    editor.chain().focus().toggleItalic().run();
+                    break;
+                case "code":
+                    editor.chain().focus().toggleCode().run();
+                    break;
+                default:
+                    console.log("Error: Style not found");
+                    break;
+            }
+        }else if (typeof style == "object" && editor) {
+            editor.chain().focus().toggleHeading({ level: style.level }).run();
+        }
+    }
+    
+    function checkStyle(style: string | {string: string, level: number}): boolean{
+        if (typeof style == "string" && editor) {
+            return editor.isActive(style);
+        }else if (typeof style == "object" && editor) {
+            return editor.isActive('heading', { level: style.level });
+        }
+        return false;
     }
 </script>
