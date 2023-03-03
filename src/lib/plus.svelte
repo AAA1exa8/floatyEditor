@@ -101,7 +101,7 @@
     });
 
     function checkWidth(){
-        bigWidth.set(document.body.clientWidth > 768); 
+        bigWidth.set(document.body.clientWidth >= 768); 
     }
 
     function addEditor(){
