@@ -25,7 +25,7 @@
                 &#xF4B4;
             </span>
         </div>
-        <div class="h-25 w-max text-center cursor-pointer select-none z-999 rounded-full font-$material_icons bg-light-50 " style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
+        <div class="h-25 w-max text-center cursor-pointer select-none z-999 rounded-full font-$material_icons" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
             <span class="text-22">
                 &#xF4FE;
             </span>
@@ -60,7 +60,7 @@
 
 <style lang="postcss">
     .selector {
-        @apply items-center justify-center text-3xl cursor-pointer select-none z-999 rounded-1 w-15 h-15 text-center bg-light-50 relative flex justify-center;
+        @apply items-center justify-center text-3xl cursor-pointer select-none z-999 rounded-1 w-15 h-15 text-center relative flex justify-center;
         font-family: material_icons;
         color: rgba(0, 0, 0, 0.5);
     }

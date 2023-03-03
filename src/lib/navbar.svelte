@@ -1,7 +1,7 @@
 <div class="h-13"></div>
-<header class="fixed bg-#2E333C z-2 w-screen font-bold top-0">
+<header class="fixed bg-#85CCC8 z-2 w-screen font-bold top-0">
     <div>
-        <nav class="text-light-700">
+        <nav class="text-stroke-gray-800">
             <span class="text-3xl">
                 floatyEditor
             </span>

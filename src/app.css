@@ -3,9 +3,9 @@
     --material_icons: material_icons;
 }
 body{
-    @apply m-0 p-0 min-w-full min-h-full md:overflow-hidden overflow-auto; 
-    background: rgb(34,40,49);
-    background: linear-gradient(133deg, rgba(34,40,49,1) 0%, rgba(57,62,70,1) 100%);
+    @apply m-0 p-0 min-w-full h-screen md:overflow-hidden overflow-auto; 
+    background: rgb(187,222,214);
+    background: linear-gradient(180deg, rgba(187,222,214,1) 23%, rgba(97,192,191,1) 69%);
 }
 
 @font-face {
