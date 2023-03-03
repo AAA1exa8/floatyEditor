@@ -6,7 +6,7 @@
 {:else}
     <!-- TODO not all selectors are included -->
     <div class="flex w-full h-30 flex justify-center items-center fixed bottom-0 bg-light-50 z-999" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
-        <div class="flex items-center justify-around w-full">
+        <div class="flex items-center justify-around w-full flex-wrap">
             <span class="selector"
                 on:click={() => selectStyle({string:'heading', level:1} )}
                 class:active={checkStyle({string:'heading', level: 1 }, editor)}
@@ -31,7 +31,7 @@
             </span>
         </div>
 
-        <div class="flex items-center justify-around w-full">
+        <div class="flex items-center justify-around w-full flex-wrap">
             <span class="selector"
                 on:click={() => selectStyle('bold')}
                 class:active={checkStyle('bold', editor)}
@@ -60,7 +60,7 @@
 
 <style lang="postcss">
     .selector {
-        @apply items-center justify-center text-3xl cursor-pointer select-none z-999 rounded-1 w-15 h-15 text-center relative flex justify-center;
+        @apply items-center justify-center text-3xl cursor-pointer select-none z-999 rounded-1 w-14 h-14 text-center relative flex justify-center;
         font-family: material_icons;
         color: rgba(0, 0, 0, 0.5);
     }
@@ -79,7 +79,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 
-    import { focusedEditor, bigWidth} from "$lib/stores/stores";
+    import { focusedEditor, bigWidth } from "$lib/stores/stores";
 	import type { Editor } from "@tiptap/core";
 
     
