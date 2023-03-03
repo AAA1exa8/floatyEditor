@@ -39,13 +39,6 @@ p:first-child, h1:first-child, h2:first-child {
     margin-inline-end: 0px;
 }
 
-p:last-child, h1:last-child, h2:last-child {
-    display: block;
-    margin-block-end: 1rem;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-}
-
 p, h1, h2 {
     font-family: sans-serif;
     padding-left: 0.625rem;
