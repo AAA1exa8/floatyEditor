@@ -1,7 +1,7 @@
 <div class="h-13"></div>
-<header class="fixed bg-#EEEEEE z-2 w-screen font-bold top-0">
+<header class="fixed bg-#2E333C z-2 w-screen font-bold top-0">
     <div>
-        <nav>
+        <nav class="text-light-700">
             <span class="text-3xl">
                 floatyEditor
             </span>
@@ -37,6 +37,5 @@
     }
     li{
         margin: 0 0.5rem;
-        color: #333;
     }
 </style>
