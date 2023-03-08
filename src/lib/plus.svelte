@@ -5,6 +5,8 @@
     </span> 
 {:else}
     <!-- TODO not all selectors are included -->
+    <!-- ? I forgot why i did the thing with  selectStyle({string:'heading', level:1}) ????-->
+    <!-- * standard editor.isActive('heading', { level:1 }) works normally but could be problematic after deleting and focusedEditor is undefined -->
     <div class="flex w-full h-30 flex justify-center items-center fixed bottom-0 bg-light-50 z-999" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
         <div class="flex items-center justify-around w-full flex-wrap">
             <span class="selector"
@@ -25,7 +27,7 @@
                 &#xF4B4;
             </span>
         </div>
-        <div class="h-25 w-max text-center cursor-pointer select-none z-999 rounded-full font-$material_icons" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
+        <div class="h-25 w-max text-center cursor-pointer select-none z-999 rounded-full" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); font-family: material_icons;" on:click={addEditor}>
             <span class="text-22">
                 &#xF4FE;
             </span>

@@ -27,7 +27,10 @@
     
     <div class="overflow-auto h-full m-2 bg-#FAE3D9 rounded-2" spellcheck="false" bind:this={element} />
     <div class="pl-2 pb-2">
-        <span class=" text-warm-gray-900 p-2 cursor-pointer select-none text-size-xl font-$material_icons" on:click={() => removeEditor('removeEditor', id)}>&#xF78B;</span>
+        <span class="text-warm-gray-900 p-2 cursor-pointer select-none text-size-xl" style="font-family: material_icons;" 
+        on:click={() => removeEditor('removeEditor', id)}>
+            &#xF78B;
+        </span>
     </div>
 </div>
 
