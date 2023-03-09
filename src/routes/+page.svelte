@@ -11,7 +11,7 @@
 
     function destroyEditor(event: { detail: number; }){
         editors = editors.filter(e => e.id != event.detail)
-        focusedEditor.set(undefined)
+        focusedEditor.set(null)
     }
     function changeZIndexes(event: { detail: {z: number, id: number} }){
         if (Math.max(...editors.map(editor => editor.z)) == event.detail.z) {
