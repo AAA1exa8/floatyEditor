@@ -107,7 +107,7 @@
             ],
             editorProps: {
                 attributes: {
-                class: 'overflow-auto h-full rounded-2 static',
+                class: 'overflow-auto h-full rounded-2',
                 },
             },
             content: '<p>Hello World! 🌍️ </p>',
