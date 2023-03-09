@@ -1,6 +1,8 @@
 <div class="h-13"></div>
 <header class="fixed bg-#85CCC8 z-2 w-screen font-bold top-0">
     <div>
+        <!-- TODO https://www.youtube.com/watch?v=S-VeYcOCFZw -->
+        <!-- TODO do those cool submenus (make up some random options or whatever) -->
         <nav class="text-stroke-gray-800">
             <span class="text-3xl">
                 floatyEditor
@@ -10,32 +12,32 @@
                 <li>Notes</li>
                 <li>Blog</li>
                 <li>Share</li>
-                <li>about</li>
+                <li>About</li>
             </ul>
-            {#if smallWitdh}
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div class="relative">
-                    <div class="visible text-3xl select-none" style="font-family: material_icons;"
-                    on:click|stopPropagation={toggleMenu}>
-                        &#xF479;
-                    </div>
-                    <div class="materialise absolute right-0 bg-#85CCC0 p-3 rounded-1 pointer-events-none opacity-0" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);"
-                    class:active={showMenu}>
-                        <ul class="flex flex-col" on:click|stopPropagation={() => {}}>
-                            <li>Floaties</li>
-                            <li>Notes</li>
-                            <li>Blog</li>
-                            <li>Share</li>
-                            <li>about</li>
-                        </ul>
-                    </div>
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- * this is not handled by js but it will only show up when is screen below 640 js -->
+            <div class="relative sm:hidden block">
+                <div class="visible text-3xl select-none" style="font-family: material_icons;"
+                on:click|stopPropagation={toggleMenu} on:touchstart|stopPropagation>
+                    &#xF479;
                 </div>
-            {/if}
+                <div class="materialise absolute right-0 bg-#85CCC0 p-3 rounded-1 pointer-events-none opacity-0" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);"
+                class:active={showMenu}
+                on:click|stopPropagation on:touchstart|preventDefault|stopPropagation>
+                    <ul class="flex flex-col">
+                        <li>Floaties</li>
+                        <li>Notes</li>
+                        <li>Blog</li>
+                        <li>Share</li>
+                        <li>About</li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     </div>
 </header>
 
-<svelte:window on:resize={ isSmallWitdh } bind:innerWidth={ innerWidth } on:click={() => {if(showMenu){toggleMenu()}}}/>
+<svelte:window on:click={() => {if(showMenu)toggleMenu("click")}} on:touchstart={() => {if(showMenu)toggleMenu("touch")}}/>
 
 <style lang="postcss">
     *{
@@ -65,20 +67,9 @@
 </style>
 
 <script lang="ts">
-	import { onMount } from "svelte";
-
-
-    let smallWitdh = false;
-    let innerWidth = 1920;
     let showMenu = false;
 
-    onMount(isSmallWitdh);
-
-    function isSmallWitdh(){
-        smallWitdh = innerWidth <= 639;
-    }
-    function toggleMenu(){
-        showMenu = !showMenu
+    function toggleMenu(e: unknown){
+        showMenu = !showMenu;
     }    
-
 </script>

@@ -1,4 +1,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- TODO make the plus button on:hover show dropdown menu with additional features like settings to change color scheme -->
+<!-- TODO ^ create solution for touch devices -->
+<!-- TODO ^ create solution for device with medium display (md:) -->
 {#if $bigWidth}
     <span class="w-17 h-17 text-center absolute right-2.5 top-16 text-3.75rem cursor-pointer select-none z-999 rounded-full font-$material_icons bg-light-50" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
         &#xF4FE;
