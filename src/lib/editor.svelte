@@ -81,7 +81,7 @@
     export var id:number;
 
     let left = 0;
-	let top = 60;
+	let top = 80;
     let initialleft: number;
     let initialtop: number;
     let moving = false;
@@ -169,8 +169,8 @@
         }else if (left < 0) {
                 left = 0
         }
-        if (top < 52){
-            top = 52;
+        if (top < 64){
+            top = 64;
         }
     }
 </script>
