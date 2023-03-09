@@ -1,4 +1,4 @@
-<div class="h-13"></div>
+<div class="h-16"></div>
 <header class="fixed bg-#85CCC8 z-2 w-screen font-bold top-0">
     <div>
         <!-- TODO https://www.youtube.com/watch?v=S-VeYcOCFZw -->
@@ -17,7 +17,7 @@
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <!-- * this is not handled by js but it will only show up when is screen below 640 js -->
             <div class="relative sm:hidden block">
-                <div class="visible text-3xl select-none" style="font-family: material_icons;"
+                <div class="visible text-3xl my-1.5 select-none" style="font-family: material_icons;"
                 on:click|stopPropagation={toggleMenu} on:touchstart|stopPropagation>
                     &#xF479;
                 </div>
@@ -53,7 +53,7 @@
         @apply list-none m-0 p-0;
     }
     li{
-        @apply mx-2 my-3;
+        @apply mx-2 my-3 text-base;
     }
     .materialise{
         transform: translateY(-10px);
