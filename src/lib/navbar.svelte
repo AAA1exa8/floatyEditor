@@ -1,5 +1,5 @@
 <div class="h-16"></div>
-<header class="fixed bg-#85CCC8 z-2 w-screen font-bold top-0">
+<header class="fixed bg-#85CCC8 z-1 w-screen font-bold top-0">
     <div>
         <!-- TODO https://www.youtube.com/watch?v=S-VeYcOCFZw -->
         <!-- TODO do those cool submenus (make up some random options or whatever) -->

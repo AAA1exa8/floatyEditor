@@ -145,7 +145,7 @@
 	}
 	
 	function onMouseMove(e: { movementX: number; movementY: number; }) {
-		if (moving && document.body.clientWidth > 768) {
+		if (moving && document.body.clientWidth >= 768) {
 			left += e.movementX;
 			top += e.movementY;
 
@@ -154,7 +154,7 @@
 	}
 
     function onTouchMove(e: TouchEvent) {
-        if (moving && document.body.clientWidth > 768) {
+        if (moving && document.body.clientWidth >= 768) {
             const touch = e.touches[0];
             left = touch.pageX - initialleft;
             top = touch.pageY - initialtop;
