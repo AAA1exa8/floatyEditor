@@ -15,7 +15,7 @@ npm run dev -- --open
 npm run build
 ```
 
-(this depends on the adapter
+(this depends on the adapter)
 ```bash
 cd ./build
 npx http-server
