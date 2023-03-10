@@ -7,7 +7,8 @@ My project to learn Svelte and unoCSS/windicss
 run with
 
 ```bash
-npm run dev
+npm install
+npm run dev -- --open
 ```
 
 ## build with
