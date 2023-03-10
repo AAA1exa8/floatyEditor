@@ -4,14 +4,12 @@ My project to learn Svelte and unoCSS/windicss
 
 ## Run
 
-run with
-
 ```bash
 npm install
 npm run dev -- --open
 ```
 
-## build with
+## Build
 
 ```bash
 npm run build
