@@ -1,86 +1,3 @@
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- TODO make the plus button on:hover show dropdown menu with additional features like settings to change color scheme -->
-<!-- TODO ^ create solution for touch devices -->
-<!-- TODO ^ create solution for device with medium display (md:) -->
-{#if $bigWidth}
-    <span class="w-17 h-17 text-center absolute right-2.5 top-18 text-3.75rem cursor-pointer select-none z-999 rounded-full font-$material_icons bg-light-50" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
-        &#xF4FE;
-    </span> 
-{:else}
-    <!-- TODO not all selectors are included -->
-    <!-- ? I forgot why i did the thing with  selectStyle({string:'heading', level:1}) ????-->
-    <!-- * standard editor.isActive('heading', { level:1 }) works normally but could be problematic after deleting and focusedEditor is undefined -->
-    <div class="flex w-full h-30 flex justify-center items-center fixed bottom-0 bg-light-50 z-999" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
-        <div class="flex items-center justify-around w-full flex-wrap">
-            <span class="selector"
-                on:click={() => selectStyle({string:'heading', level:1} )}
-                class:active={checkStyle({string:'heading', level: 1 }, editor)}
-            >
-                &#xF799;
-            </span>
-            <span class="selector"
-                on:click={() => selectStyle({string:'heading', level:2} )}
-                class:active={checkStyle({string:'heading', level: 2 }, editor)}
-            >
-                &#xF79F;
-            </span>
-            <span class="selector" 
-                on:click={() => selectStyle('paragraph')}
-                class:active={checkStyle('paragraph', editor)}>
-                &#xF4B4;
-            </span>
-        </div>
-        <div class="h-25 w-max text-center cursor-pointer select-none z-999 rounded-full" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); font-family: material_icons;" on:click={addEditor}>
-            <span class="text-22">
-                &#xF4FE;
-            </span>
-        </div>
-
-        <div class="flex items-center justify-around w-full flex-wrap">
-            <span class="selector"
-                on:click={() => selectStyle('bold')}
-                class:active={checkStyle('bold', editor)}
-            >
-                <span>&#xF5F0;</span>
-            </span>
-            <span class="selector"
-                on:click={() => selectStyle('italic')}
-                class:active={checkStyle('italic', editor)}
-            >
-                <span>&#xF5F4;</span>
-            </span>
-            <span class="selector" 
-                on:click={() => selectStyle('code')} 
-                class:active={checkStyle('code', editor)}
-            >
-                <span>&#xF2C8;</span>
-            </span>
-        </div>
-    </div>
-    <div class="h-33"></div>
-{/if}
- 
-
-
-
-<style lang="postcss">
-    .selector {
-        @apply items-center justify-center text-3xl cursor-pointer select-none z-999 rounded-1 w-14 h-14 text-center relative flex justify-center;
-        font-family: material_icons;
-        color: rgba(0, 0, 0, 0.5);
-    }
-    /* ! this shits kinda wonky */
-    span.active {
-        color: rgb(0, 0, 0);
-        background-color: rgba(20, 20, 20, 0.15);
-    }
-    .active:hover {
-        color: rgb(0, 0, 0);
-    }
-</style>
-
-
-
 <script lang="ts">
 	import { onMount } from "svelte";
 
@@ -153,3 +70,84 @@
         return false;
     }
 </script>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- TODO make the plus button on:hover show dropdown menu with additional features like settings to change color scheme -->
+<!-- TODO ^ create solution for touch devices -->
+<!-- TODO ^ create solution for device with medium display (md:) -->
+{#if $bigWidth}
+    <span class="w-17 h-17 text-center absolute right-2.5 top-18 text-3.75rem cursor-pointer select-none z-999 rounded-full font-$material_icons bg-light-50" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" on:click={addEditor}>
+        &#xF4FE;
+    </span>
+{:else}
+    <!-- TODO not all selectors are included -->
+    <!-- ? I forgot why i did the thing with  selectStyle({string:'heading', level:1}) ????-->
+    <!-- * standard editor.isActive('heading', { level:1 }) works normally but could be problematic after deleting and focusedEditor is undefined -->
+    <div class="flex w-full h-30 flex justify-center items-center fixed bottom-0 bg-light-50 z-999" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);">
+        <div class="flex items-center justify-around w-full flex-wrap">
+            <span class="selector"
+                on:click={() => selectStyle({string:'heading', level:1} )}
+                class:active={checkStyle({string:'heading', level: 1 }, editor)}
+            >
+                &#xF799;
+            </span>
+            <span class="selector"
+                on:click={() => selectStyle({string:'heading', level:2} )}
+                class:active={checkStyle({string:'heading', level: 2 }, editor)}
+            >
+                &#xF79F;
+            </span>
+            <span class="selector" 
+                on:click={() => selectStyle('paragraph')}
+                class:active={checkStyle('paragraph', editor)}>
+                &#xF4B4;
+            </span>
+        </div>
+        <div class="h-25 w-max text-center cursor-pointer select-none z-999 rounded-full" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); font-family: material_icons;" on:click={addEditor}>
+            <span class="text-22">
+                &#xF4FE;
+            </span>
+        </div>
+
+        <div class="flex items-center justify-around w-full flex-wrap">
+            <span class="selector"
+                on:click={() => selectStyle('bold')}
+                class:active={checkStyle('bold', editor)}
+            >
+                <span>&#xF5F0;</span>
+            </span>
+            <span class="selector"
+                on:click={() => selectStyle('italic')}
+                class:active={checkStyle('italic', editor)}
+            >
+                <span>&#xF5F4;</span>
+            </span>
+            <span class="selector" 
+                on:click={() => selectStyle('code')} 
+                class:active={checkStyle('code', editor)}
+            >
+                <span>&#xF2C8;</span>
+            </span>
+        </div>
+    </div>
+    <div class="h-33"></div>
+{/if}
+ 
+
+
+
+<style lang="postcss">
+    .selector {
+        @apply items-center justify-center text-3xl cursor-pointer select-none z-999 rounded-1 w-14 h-14 text-center relative flex justify-center;
+        font-family: material_icons;
+        color: rgba(0, 0, 0, 0.5);
+    }
+    /* ! this shits kinda wonky */
+    span.active {
+        color: rgb(0, 0, 0);
+        background-color: rgba(20, 20, 20, 0.15);
+    }
+    .active:hover {
+        color: rgb(0, 0, 0);
+    }
+</style>

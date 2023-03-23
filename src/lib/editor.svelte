@@ -1,74 +1,3 @@
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="m-2 md:m-0 md:w-90 h-135 flex flex-col rounded-3 md:absolute static bg-#FFB6B9" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
-    on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})} on:click={() => focusedEditor.set(editor)}>
-    {#if editor && $bigWidth}
-        <div class="m-2 flex mx-3">
-                <div class="flex">
-                    <span
-                        on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
-                        class:active={editor.isActive('heading', { level: 1 })}
-                    >
-                        &#xF799;
-                    </span>
-                    <span   
-                        on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                        class:active={editor.isActive('heading', { level: 2 })}
-                    >
-                        &#xF79F;
-                    </span>
-                    <span on:click={() => editor.chain().focus().setParagraph().run()} 
-                        class:active={editor.isActive('paragraph')}>
-                        &#xF4B4;
-                    </span>
-                </div>
-            <div class="flex-grow cursor-move" on:mousedown={onMouseDown} on:touchstart={onTouchStart} on:touchstart={() => toFocus('toFocus', {z: zIndex, id: id})}></div>
-        </div>  
-    {/if}
-    
-    <div class="overflow-auto h-full m-2 bg-#FAE3D9 rounded-2" spellcheck="false" bind:this={element} />
-    <div class="pl-2 pb-2">
-        <span class="text-warm-gray-900 p-2 cursor-pointer select-none text-size-xl" style="font-family: material_icons;" 
-        on:click={() => removeEditor('removeEditor', id)}>
-            &#xF78B;
-        </span>
-    </div>
-</div>
-
-<Bubblemenu bind:bubbleMenu={bubbleMenu} bind:editor={editor}/>
-
-
-<svelte:window on:mouseup={onMoveEnd} on:mousemove={onMouseMove} on:resize={positionCorrection} on:touchend={onMoveEnd} on:touchmove={onTouchMove}/>
-
-
-  
-
-<style lang="postcss">
-    div div div span{
-        @apply rounded-1;
-        padding: 0.5rem;
-        font-family: material_icons;
-        font-size: 1.25rem;
-        text-align: center;
-        color: rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-        user-select: none;
-    }
-    div div div span:hover{
-        color: rgb(0, 0, 0);
-    }
-    span.active{
-        color: rgb(0, 0, 0);
-        background-color: rgba(20, 20, 20, 0.15);   
-    }
-    :global(code) {
-        background-color: rgba(97, 97, 97, 0.5);
-        border-radius: 0.25em;
-        color: #616161;
-        line-height: 1.5rem;
-        padding-inline: 0.25em;
-    }
-</style>
-
 <script lang="ts">
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { Editor } from '@tiptap/core'
@@ -174,3 +103,74 @@
         }
     }
 </script>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="m-2 md:m-0 md:w-90 h-135 flex flex-col rounded-3 md:absolute static bg-#FFB6B9" style="left: {left}px; top: {top}px; z-index: {zIndex}; box-shadow: 0 0 28px rgba(0, 0, 0, 0.1);" 
+on:mousedown={() => toFocus('toFocus', {z: zIndex, id: id})} on:click={() => focusedEditor.set(editor)}>
+{#if editor && $bigWidth}
+        <div class="m-2 flex mx-3">
+                <div class="flex">
+                    <span
+                        on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
+                        class:active={editor.isActive('heading', { level: 1 })}
+                    >
+                        &#xF799;
+                    </span>
+                    <span   
+                        on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                        class:active={editor.isActive('heading', { level: 2 })}
+                    >
+                        &#xF79F;
+                    </span>
+                    <span on:click={() => editor.chain().focus().setParagraph().run()} 
+                        class:active={editor.isActive('paragraph')}>
+                        &#xF4B4;
+                    </span>
+                </div>
+            <div class="flex-grow cursor-move" on:mousedown={onMouseDown} on:touchstart={onTouchStart} on:touchstart={() => toFocus('toFocus', {z: zIndex, id: id})}></div>
+        </div>  
+    {/if}
+    
+    <div class="overflow-auto h-full m-2 bg-#FAE3D9 rounded-2" spellcheck="false" bind:this={element} />
+    <div class="pl-2 pb-2">
+        <span class="text-warm-gray-900 p-2 cursor-pointer select-none text-size-xl" style="font-family: material_icons;" 
+        on:click={() => removeEditor('removeEditor', id)}>
+            &#xF78B;
+        </span>
+    </div>
+</div>
+
+<Bubblemenu bind:bubbleMenu={bubbleMenu} bind:editor={editor}/>
+
+
+<svelte:window on:mouseup={onMoveEnd} on:mousemove={onMouseMove} on:resize={positionCorrection} on:touchend={onMoveEnd} on:touchmove={onTouchMove}/>
+
+
+  
+
+<style lang="postcss">
+    div div div span{
+        @apply rounded-1;
+        padding: 0.5rem;
+        font-family: material_icons;
+        font-size: 1.25rem;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        user-select: none;
+    }
+    div div div span:hover{
+        color: rgb(0, 0, 0);
+    }
+    span.active{
+        color: rgb(0, 0, 0);
+        background-color: rgba(20, 20, 20, 0.15);   
+    }
+    :global(code) {
+        background-color: rgba(97, 97, 97, 0.5);
+        border-radius: 0.25em;
+        color: #616161;
+        line-height: 1.5rem;
+        padding-inline: 0.25em;
+    }
+</style>
